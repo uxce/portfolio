@@ -82,7 +82,7 @@ export function createGallery() {
     });
   }
 
-  fetch('/photos.json')
+  fetch(`${import.meta.env.BASE_URL}photos.json`)
     .then((res) => {
       if (!res.ok) throw new Error(`photos.json ${res.status}`);
       return res.json();
