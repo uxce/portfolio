@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>?</title>
+    <script type="module" crossorigin src="/portfolio/assets/index-Dv1UTprm.js"></script>
+    <link rel="stylesheet" crossorigin href="/portfolio/assets/index-DBQkpInK.css">
+  </head>
+  <body>
+
+    <div id="viewport">
+
+    <div id="introScreen">
+      <canvas id="introGrainCanvas"></canvas>
+      <div class="intro-scanlines"></div>
+      <div class="intro-vignette"></div>
+      <div class="intro-text" id="introText"></div>
+    </div>
+
+    <div id="hudBottomRight">
+      <div class="hud-br-line">[ESC]: EXIT CAR</div>
+      <div class="hud-br-line">[CLICK]: INTERACT</div>
+    </div>
+
+    <aside id="sidebar">
+      <div class="hud-cluster">
+        <div class="hud-label">YOU ARE VIEWING</div>
+        <div class="hud-title" id="hudTitle">idk</div>
+        <div class="hud-date" id="hudDate">--:-- -- -- --------, ----</div>
+      </div>
+
+      <nav id="sbNav"></nav>
+
+      <div class="hud-cluster hud-music">
+        <div class="hud-label">NOW PLAYING</div>
+        <div class="hud-track" id="sbTrackTitle">SELECT A TRACK</div>
+        <div class="hud-artist" id="sbTrackArtist">— — —</div>
+        <div class="hud-progress-track"><div class="hud-progress-fill" id="sbProgressFill"></div></div>
+        <div class="hud-controls">
+          <button class="hud-btn" id="sbPrev">⏮</button>
+          <button class="hud-btn hud-btn-play" id="sbPlay">▶</button>
+          <button class="hud-btn" id="sbNext">⏭</button>
+          <input type="range" id="sbVolume" class="hud-volume" min="0" max="1" step="0.05" value="0.4" aria-label="Volume">
+        </div>
+      </div>
+
+      <div class="hud-cluster hud-bottom">
+        <a href="#" class="hud-link" target="_blank" rel="noopener">GITHUB →</a>
+      </div>
+    </aside>
+
+    <div id="screenFrame">
+
+      <div id="crtOverlay">
+        <canvas id="grainCanvas"></canvas>
+        <div id="scanlines"></div>
+        <div id="vignette"></div>
+      </div>
+
+      <div id="transitionFade"></div>
+
+      <div id="exteriorOverlay">
+        <div id="extPanel">
+          <button id="extClose" aria-label="Close">&times;</button>
+          <section class="ext-page" data-panel="about">
+            <h2>ABOUT</h2>
+
+            <p class="ext-bio-single">
+              <span class="ext-highlight">IT student at UCF</span>, focused on
+              <span class="ext-highlight">cybersecurity</span>. I also like
+              working on cars.
+            </p>
+            <div class="tl-hint">Click into the car for more →</div>
+          </section>
+          <section class="ext-page" data-panel="projects">
+            <h2>PROJECTS</h2>
+
+              <div class="ext-grid">
+              <a class="ext-card" href="#" data-project="pentest">
+                <span class="ext-card-img">
+                  <span class="ext-card-fallback">PT</span>
+                  <img src="https://pub-f3421bbecaba465e83e033376eb8cdb2.r2.dev/projects/inbiome/frontpage_cleaned.png" alt="" loading="lazy" onerror="this.style.display='none'">
+                </span>
+                <span class="ext-card-body">
+                  <span class="ext-card-title">INBIOME PEN TEST</span>
+                  <span class="ext-card-tag">RED TEAM · DISCLOSED</span>
+                </span>
+              </a>
+              <a class="ext-card" href="#" data-project="blueteam">
+                <span class="ext-card-img">
+                  <span class="ext-card-fallback">BT</span>
+                  <img src="https://pub-f3421bbecaba465e83e033376eb8cdb2.r2.dev/projects/hpcc3/hpcc3group.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+                </span>
+                <span class="ext-card-body">
+                  <span class="ext-card-title">HACK@UCF BLUE TEAM</span>
+                  <span class="ext-card-tag">4TH / 55 TEAMS</span>
+                </span>
+              </a>
+              <a class="ext-card" href="#" data-project="discord">
+                <span class="ext-card-img">
+                  <span class="ext-card-fallback">DC</span>
+                  <img src="https://pub-f3421bbecaba465e83e033376eb8cdb2.r2.dev/projects/discMessage/discord.png" alt="" loading="lazy" onerror="this.style.display='none'">
+                </span>
+                <span class="ext-card-body">
+                  <span class="ext-card-title">DISCORD MSG DELETER</span>
+                  <span class="ext-card-tag">PYTHON · SHIPPED</span>
+                </span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div id="repaintMask"></div>
+
+    <div id="photoLightbox">
+      <div class="pl-close" id="plClose">✕ CLOSE</div>
+      <div class="pl-prev" id="plPrev">◀</div>
+      <img src="" alt="" id="plImg">
+      <div class="pl-next" id="plNext">▶</div>
+      <div class="pl-caption" id="plCaption"></div>
+    </div>
+
+    <div id="resumeModal">
+      <div id="resumePanel">
+        <div class="resume-modal-head">
+          <span class="resume-modal-title">RESUME</span>
+          <div class="resume-modal-actions">
+            <a id="resumeDownload" class="resume-btn" href="https://pub-f3421bbecaba465e83e033376eb8cdb2.r2.dev/Resume_Alex_Hila_AUG.pdf" download="Alex_Hila_Resume.pdf">⬇ DOWNLOAD</a>
+            <button id="resumeClose" class="resume-btn resume-btn-close" aria-label="Close">&times;</button>
+          </div>
+        </div>
+        <iframe id="resumeFrame" title="Resume"></iframe>
+      </div>
+    </div>
+
+    <div id="screenOverlay">
+      <div id="osPanel">
+        <button id="osClose" aria-label="Close">&times;</button>
+        <nav id="osNav">
+          <a href="#" class="os-tab active" data-tab="about">ABOUT</a>
+          <a href="#" class="os-tab" data-tab="projects">PROJECTS</a>
+          <a href="#" class="os-tab" data-tab="gallery">GALLERY</a>
+          <a href="#" class="os-tab" data-tab="music">MUSIC</a>
+        </nav>
+        <div id="osContent">
+          <section class="os-page active" data-panel="about">
+            <h1>HELLO, IM ALEX</h1>
+            <div class="about-grid">
+              <div class="about-bio-col">
+                <p class="about-bio">Information Technology student at the University of Central Florida, focused on cybersecurity. I like figuring out how systems break — pentesting real platforms, running my own home lab, or just working on my car.</p>
+                <div class="about-divider"></div>
+                <div class="skill-rows">
+                  <div class="skill-row">
+                    <span class="skill-label">Security</span>
+                    <span class="skill-value">Firewall configuration, endpoint protection, basic cryptography</span>
+                  </div>
+                  <div class="skill-row">
+                    <span class="skill-label">Systems</span>
+                    <span class="skill-value">Docker, Linux server administration, RAID, SMB/NFS</span>
+                  </div>
+                  <div class="skill-row">
+                    <span class="skill-label">Networking</span>
+                    <span class="skill-value">TCP/IP, DNS, DHCP, LAN/WAN</span>
+                  </div>
+                  <div class="skill-row">
+                    <span class="skill-label">Languages</span>
+                    <span class="skill-value">Python, JavaScript, HTML/CSS</span>
+                  </div>
+                  <div class="skill-row skill-row-certs">
+                    <span class="skill-label">Certifications</span>
+                    <span class="skill-value">CompTIA Tech+, Microsoft Specialist 2019 · In progress: Security+, Network+, Linux+, A+</span>
+                  </div>
+                </div>
+              </div>
+              <div class="about-timeline">
+                <div class="tl-group">
+                  <span class="tl-group-label">EXPERIENCE</span>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-item-body">
+                      <div class="tl-item-head">
+                        <span class="tl-role">Team Member</span>
+                        <span class="tl-year">2025–Present</span>
+                      </div>
+                      <div class="tl-org">Harbor Freight Tools</div>
+                    </div>
+                  </div>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-item-body">
+                      <div class="tl-item-head">
+                        <span class="tl-role">Security Researcher</span>
+                        <span class="tl-year">2026</span>
+                      </div>
+                      <div class="tl-org">inBiome (Freelance)</div>
+                      <p class="tl-desc">Disclosed a critical API vulnerability exposing client data.</p>
+                    </div>
+                  </div>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-item-body">
+                      <div class="tl-item-head">
+                        <span class="tl-role">Plinktern</span>
+                        <span class="tl-year">OCT 2025</span>
+                      </div>
+                      <div class="tl-org">Hack@UCF CCDC Blue Team Competitor</div>
+                      <p class="tl-desc">Placed 4th of 55 teams.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="tl-group">
+                  <span class="tl-group-label">EDUCATION</span>
+                  <div class="tl-item">
+                    <span class="tl-dot"></span>
+                    <div class="tl-item-body">
+                      <div class="tl-item-head">
+                        <span class="tl-role">B.S. Information Technology</span>
+                        <span class="tl-year">2025–2027</span>
+                      </div>
+                      <div class="tl-org">University of Central Florida · Expected 2027</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="os-page" data-panel="projects">
+
+            <div id="osProjectsList">
+              <h1>PROJECTS</h1>
+              <p class="os-projects-intro">Selected work — security research, tooling, and competition.</p>
+              <div class="os-project-grid" id="osProjectGrid"></div>
+            </div>
+
+            <div id="osProjectArticle">
+              <button class="os-article-back" id="osArticleBack" type="button">← Back to projects</button>
+              <div class="os-article-hero">
+                <span class="os-article-hero-fallback" id="osArticleHeroFallback"></span>
+                <img id="osArticleImg" src="" alt="" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <div class="os-article-head">
+                <h1 id="osArticleTitle"></h1>
+                <span class="os-article-status" id="osArticleStatus"></span>
+              </div>
+              <div class="os-article-meta">
+                <span class="os-article-date" id="osArticleDate"></span>
+                <span class="os-article-tags" id="osArticleTags"></span>
+              </div>
+              <div class="os-article-body" id="osArticleBody"></div>
+              <a class="os-article-link" id="osArticleLink" href="#" target="_blank" rel="noopener"></a>
+            </div>
+          </section>
+          <section class="os-page" data-panel="gallery">
+            <h1>GALLERY <span class="os-photo-count" id="osPhotoCount">— PHOTOS</span></h1>
+            <p class="os-projects-intro">The 1995 Nissan 240SX (S14) — from purchase to the ongoing build.</p>
+            <div class="os-grid os-gallery"></div>
+          </section>
+          <section class="os-page" data-panel="music">
+            <div class="mp-wrap">
+              <div class="mp-header">
+                <span class="now-playing-dot paused" id="npDot"></span>
+                <span class="mp-now-label">NOW PLAYING</span>
+              </div>
+              <div class="mp-trackinfo">
+                <div class="mp-title" id="mpTitle">SELECT A TRACK</div>
+                <div class="mp-artist" id="mpArtist">— — —</div>
+              </div>
+              <div class="mp-visualizer" id="mpVisualizer"></div>
+              <div class="mp-progress-wrap">
+                <div class="mp-progress-track" id="mpProgressTrack">
+                  <div class="mp-progress-fill" id="mpProgressFill"></div>
+                </div>
+                <div class="mp-time-row">
+                  <span id="mpElapsed">0:00</span>
+                  <span id="mpDuration">0:00</span>
+                </div>
+              </div>
+              <div class="mp-controls">
+                <button class="mp-btn" id="mpPrev">⏮</button>
+                <button class="mp-btn mp-btn-play" id="mpPlay">▶</button>
+                <button class="mp-btn" id="mpNext">⏭</button>
+                <button class="mp-btn" id="mpLoop">↺</button>
+                <div class="mp-vol">
+                  <span>VOL</span>
+                  <input type="range" id="mpVolume" min="0" max="1" step="0.05" value="0.4">
+                </div>
+              </div>
+              <div class="mp-tracklist" id="mpTrackList"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </body>
+</html>
