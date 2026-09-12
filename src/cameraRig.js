@@ -170,7 +170,7 @@ export function createCameraRig({ camera, renderer, screenFrame, lens, kickFilte
     tweenEndFisheye = isExteriorish ? FISHEYE_EXTERIOR : FISHEYE_FLAT;
 
     const CABIN_POS = { interior: interiorCamPos, screen: screenCamPos };
-    const CABIN_TARGET = { interior: interiorCamTarget, screen: screenCamTarget };
+    const CABIN_TARGET = { screen: screenCamTarget };
 
     if (CABIN_POS[fromState]) {
       tweenStartPos.copy(CABIN_POS[fromState]);
