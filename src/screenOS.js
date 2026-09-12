@@ -110,7 +110,6 @@ export function createScreenOS({ cameraRig, heroLoop, kickFilterRepaint, openIma
         </span>
         <span class="os-project-card-body">
           <span class="os-project-card-top">
-            <span class="os-project-card-num">// ${String(i + 1).padStart(2, '0')}</span>
             <span class="os-project-card-status">${p.status}</span>
           </span>
           <span class="os-project-card-title">${p.name}</span>
