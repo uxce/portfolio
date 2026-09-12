@@ -4164,7 +4164,6 @@ void main() {
         </span>
         <span class="os-project-card-body">
           <span class="os-project-card-top">
-            <span class="os-project-card-num">// ${String(t+1).padStart(2,`0`)}</span>
             <span class="os-project-card-status">${e.status}</span>
           </span>
           <span class="os-project-card-title">${e.name}</span>
