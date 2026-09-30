@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { id: 'home',     label: 'HOME',     jp: 'ホーム' },
   { id: 'about',    label: 'ABOUT',    jp: 'について' },
   { id: 'projects', label: 'PROJECTS', jp: '私の作品' },
+  { id: 'gallery',  label: 'GALLERY',  jp: 'ギャラリー' },
   { id: 'resume',   label: 'RESUME',   jp: '履歴書' },
 ];
 

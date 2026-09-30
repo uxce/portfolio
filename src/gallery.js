@@ -1,7 +1,7 @@
 export function createGallery() {
   const extGrid = document.querySelector('.ext-gallery');
   const osGrid = document.querySelector('.os-gallery');
-  const extCount = document.getElementById('extPhotoCount');
+  const EXT_PREVIEW_COUNT = 6;
   const osCount = document.getElementById('osPhotoCount');
 
   const lightbox = document.getElementById('photoLightbox');
@@ -55,6 +55,39 @@ export function createGallery() {
     else if (e.key === 'ArrowRight') showPhoto(currentIndex + 1);
   });
 
+  function buildExtPreview() {
+    if (!extGrid) return;
+    extGrid.innerHTML = '';
+    if (!photos.length) {
+      const empty = document.createElement('div');
+      empty.className = 'ext-photo-empty';
+      empty.textContent = 'No photos yet — check back soon.';
+      extGrid.appendChild(empty);
+      return;
+    }
+    const order = photos.map((_, i) => i);
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    order.slice(0, EXT_PREVIEW_COUNT).forEach((idx) => {
+      const p = photos[idx];
+      const tile = document.createElement('div');
+      tile.className = 'ext-photo';
+      const img = document.createElement('img');
+      img.src = p.src;
+      img.alt = p.label || `Photo ${idx + 1}`;
+      img.loading = 'lazy';
+      const tag = document.createElement('span');
+      tag.className = 'ext-photo-tag';
+      tag.textContent = p.tag || '';
+      tile.appendChild(img);
+      tile.appendChild(tag);
+      tile.addEventListener('click', () => showPhoto(idx));
+      extGrid.appendChild(tile);
+    });
+  }
+
   function buildGrid(gridEl, tileClass) {
     if (!gridEl) return;
     gridEl.innerHTML = '';
@@ -89,20 +122,18 @@ export function createGallery() {
     })
     .then((data) => {
       photos = Array.isArray(data) ? data : [];
-      buildGrid(extGrid, 'ext-photo');
+      buildExtPreview();
       buildGrid(osGrid, 'os-photo');
       const countText = `${photos.length} PHOTO${photos.length === 1 ? '' : 'S'}`;
-      if (extCount) extCount.textContent = countText;
       if (osCount) osCount.textContent = countText;
     })
     .catch((err) => {
       console.error('[gallery] failed to load photos.json:', err);
 
       photos = [];
-      buildGrid(extGrid, 'ext-photo');
+      buildExtPreview();
       buildGrid(osGrid, 'os-photo');
       const countText = '0 PHOTOS';
-      if (extCount) extCount.textContent = countText;
       if (osCount) osCount.textContent = countText;
     });
 

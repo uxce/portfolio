@@ -15,3 +15,8 @@ export const FREE_LOOK_TARGET = new THREE.Vector3(0, 0.6, 0);
 const SCREEN_EXIT_T = 0.4;
 export const screenExitCamPos    = screenCamPos.clone().lerp(interiorCamPos, SCREEN_EXIT_T);
 export const screenExitCamTarget = screenCamTarget.clone().lerp(interiorCamTarget, SCREEN_EXIT_T);
+
+export const INTRO_CAM_TARGET = new THREE.Vector3(0.58, 0.53, 2.11);
+export const INTRO_CAM_POS    = new THREE.Vector3(0.58, 0.53, 3.0);
+export const INTRO_PULL_VIA   = new THREE.Vector3(1.1, 0.7, 5.0);
+export const INTRO_PULL_MS    = 3000;

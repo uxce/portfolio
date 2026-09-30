@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { createLensDistortion } from './lensDistortion.js';
-import { HERO_SHOTS } from './heroLoop.js';
+import { INTRO_CAM_POS, INTRO_CAM_TARGET } from './positions.js';
 
 export function createSceneSetup() {
   const screenFrame = document.getElementById('screenFrame');
@@ -10,8 +10,8 @@ export function createSceneSetup() {
 
   const camera = new THREE.PerspectiveCamera(45, screenFrame.clientWidth / screenFrame.clientHeight, 0.1, 1000);
 
-  camera.position.copy(HERO_SHOTS[0].startPos);
-  camera.lookAt(HERO_SHOTS[0].startTarget);
+  camera.position.copy(INTRO_CAM_POS);
+  camera.lookAt(INTRO_CAM_TARGET);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   renderer.setSize(screenFrame.clientWidth, screenFrame.clientHeight);

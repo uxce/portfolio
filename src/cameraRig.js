@@ -120,11 +120,13 @@ export function createCameraRig({ camera, renderer, screenFrame, lens, kickFilte
   let tweenStartTarget = new THREE.Vector3();
   let tweenEndTarget = new THREE.Vector3();
   let transitionCurve = null;
+  let transitionDuration = TRANSITION_MS;
+  let skipClipGuard = false;
   let onTransitionFinish = null;
   let tweenStartFisheye = { ...FISHEYE_EXTERIOR };
   let tweenEndFisheye = { ...FISHEYE_EXTERIOR };
 
-  function beginTransition(toPos, toTarget, nextState) {
+  function beginTransition(toPos, toTarget, nextState, opts = {}) {
     const fromState = camState;
     const pairKey = `${fromState}->${nextState}`;
     console.log(`[transition] START ${fromState} -> ${nextState} @ ${performance.now().toFixed(0)}ms`);
@@ -188,9 +190,13 @@ export function createCameraRig({ camera, renderer, screenFrame, lens, kickFilte
     tweenEndPos.copy(toPos);
     tweenEndTarget.copy(toTarget);
     transitionStartTime = performance.now();
+    transitionDuration = opts.duration ?? TRANSITION_MS;
+    skipClipGuard = !!opts.skipClipGuard;
 
     const crossesShell = SHELL_CROSSING_PAIRS.has(pairKey);
-    if (crossesShell) {
+    if (opts.via) {
+      transitionCurve = new THREE.QuadraticBezierCurve3(tweenStartPos.clone(), opts.via.clone(), tweenEndPos.clone());
+    } else if (crossesShell) {
       const mid = tweenStartPos.clone().lerp(tweenEndPos, 0.5);
       mid.y += 1.4;
       transitionCurve = new THREE.QuadraticBezierCurve3(tweenStartPos.clone(), mid, tweenEndPos.clone());
@@ -238,14 +244,14 @@ export function createCameraRig({ camera, renderer, screenFrame, lens, kickFilte
   }
 
   function updateTransition() {
-    const t = Math.min((performance.now() - transitionStartTime) / TRANSITION_MS, 1);
+    const t = Math.min((performance.now() - transitionStartTime) / transitionDuration, 1);
     const eased = easeInOutCubic(t);
     if (transitionCurve) {
       camera.position.copy(transitionCurve.getPoint(eased));
     } else {
       camera.position.lerpVectors(tweenStartPos, tweenEndPos, eased);
     }
-    applyExteriorClipGuard(camera.position);
+    if (!skipClipGuard) applyExteriorClipGuard(camera.position);
     controls.target.lerpVectors(tweenStartTarget, tweenEndTarget, eased);
     camera.lookAt(controls.target);
     lens.uniforms.strength.value = THREE.MathUtils.lerp(tweenStartFisheye.strength, tweenEndFisheye.strength, eased);
@@ -266,7 +272,7 @@ export function createCameraRig({ camera, renderer, screenFrame, lens, kickFilte
 
   function resumeFromHidden(now) {
     if (camState === 'transitioning') {
-      transitionStartTime = now - TRANSITION_MS;
+      transitionStartTime = now - transitionDuration;
     }
     if (camState === 'freelook') armFreeLookIdleTimer();
   }

@@ -41,7 +41,7 @@ function makeGaugeGlow(scene, pos) {
   return { light, sprite };
 }
 
-export function loadCar({ scene, manager, screenTexture, onLoaded }) {
+export function loadCar({ scene, manager, screenTexture, onLoaded, onError }) {
   const dracoLoader = new DRACOLoader();
   dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 
@@ -118,5 +118,10 @@ export function loadCar({ scene, manager, screenTexture, onLoaded }) {
     };
 
     onLoaded({ carModel, headlightL, headlightR, domeLight, gaugeGlows });
+  },
+  undefined,
+  (err) => {
+    console.error('[carLoader] failed to load car model:', err);
+    if (onError) onError(err);
   });
 }
