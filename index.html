@@ -5,10 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>?</title>
-    <script type="module" crossorigin src="/portfolio/assets/index-CNJxWlQc.js"></script>
-    <link rel="stylesheet" crossorigin href="/portfolio/assets/index-DBQkpInK.css">
+    <style>
+      html, body { margin: 0; background: #060503; overflow: hidden; }
+      #viewport { position: fixed; inset: 0; }
+      .intro-loader { width: calc(var(--lamp-scale, 58.7) * 1vh); aspect-ratio: 420 / 120; }
+      .intro-lamp { width: 100%; height: 100%; display: block; }
+      #introScreen { position: fixed; inset: 0; z-index: 95; background: #060503;
+                     display: flex; align-items: center; justify-content: center; }
+    </style>
+    <script type="module" crossorigin src="/portfolio/assets/index-D5UXUpCY.js"></script>
+    <link rel="stylesheet" crossorigin href="/portfolio/assets/index-B-Hyp6Mm.css">
   </head>
-  <body>
+  <body class="intro-active">
 
     <div id="viewport">
 
@@ -16,7 +24,21 @@
       <canvas id="introGrainCanvas"></canvas>
       <div class="intro-scanlines"></div>
       <div class="intro-vignette"></div>
-      <div class="intro-text" id="introText"></div>
+      <div class="intro-loader" id="introLoader" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <svg class="intro-lamp" viewBox="-210 -60 420 120" width="420" height="120" aria-hidden="true">
+          <defs>
+            <radialGradient id="introHaloGrad" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="72">
+              <stop offset="0" stop-color="#5fb4ff" stop-opacity="0.10"/>
+              <stop offset="0.3" stop-color="#5fb4ff" stop-opacity="0.55"/>
+              <stop offset="0.62" stop-color="#5fb4ff" stop-opacity="0.16"/>
+              <stop offset="1" stop-color="#5fb4ff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle class="intro-halo" cx="0" cy="0" r="72" fill="url(#introHaloGrad)" opacity="0"/>
+          <circle class="intro-eye-track" cx="0" cy="0" r="22" fill="none" stroke="#161a1e" stroke-width="2"/>
+          <circle class="intro-eye-ring" cx="0" cy="0" r="22" pathLength="100" transform="rotate(-90)" fill="none" stroke="#9fd6ff" stroke-width="4" opacity="0"/>
+        </svg>
+      </div>
     </div>
 
     <div id="hudBottomRight">
@@ -33,6 +55,10 @@
 
       <nav id="sbNav"></nav>
 
+      <div class="hud-cluster hud-bottom">
+        <a href="#" class="hud-link" target="_blank" rel="noopener">GITHUB →</a>
+      </div>
+
       <div class="hud-cluster hud-music">
         <div class="hud-label">NOW PLAYING</div>
         <div class="hud-track" id="sbTrackTitle">SELECT A TRACK</div>
@@ -46,9 +72,6 @@
         </div>
       </div>
 
-      <div class="hud-cluster hud-bottom">
-        <a href="#" class="hud-link" target="_blank" rel="noopener">GITHUB →</a>
-      </div>
     </aside>
 
     <div id="screenFrame">
@@ -109,6 +132,13 @@
                 </span>
               </a>
             </div>
+          </section>
+          <section class="ext-page" data-panel="gallery">
+            <div class="ext-gallery-head">
+              <h2>GALLERY</h2>
+              <button class="ext-gallery-more" id="extGalleryMore" type="button">VIEW MORE →</button>
+            </div>
+            <div class="ext-gallery"></div>
           </section>
         </div>
       </div>
