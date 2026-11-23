@@ -18,6 +18,7 @@ import { createHudClock } from './hudClock.js';
 import { createGlitchTitle } from './glitchTitle.js';
 import { createGallery } from './gallery.js';
 import { createModelOutline } from './modelOutline.js';
+import { createClasses } from './classes.js';
 import { INTRO_CAM_POS, INTRO_CAM_TARGET, INTRO_PULL_VIA, INTRO_PULL_MS } from './positions.js';
 
 const { scene, camera, renderer, lens, screenFrame } = createSceneSetup();
@@ -31,6 +32,7 @@ const introGrain = createFilmGrain('introGrainCanvas');
 const heroLoop = createHeroLoop(camera);
 
 const gallery = createGallery();
+createClasses();
 
 const resumeViewer = createResumeViewer();
 
